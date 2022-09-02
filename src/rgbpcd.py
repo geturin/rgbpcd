@@ -84,13 +84,15 @@ if __name__ == "__main__":
 
 
     # #RGBF32
-    # color = (rgb_list/255).astype(np.float32)
     # fields = [  PointField("x",0,PointField.FLOAT32,1),
     #                 PointField("y",4,PointField.FLOAT32,1),
     #                 PointField("z",8,PointField.FLOAT32,1),
     #                 PointField("r",12,PointField.FLOAT32,1),
     #                 PointField("g",16,PointField.FLOAT32,1),
     #                 PointField("b",20,PointField.FLOAT32,1)]
+
+    # color = (rgb_list/255).astype(np.float32)
+    ###########################################################
 
 
     # RGB8
@@ -103,6 +105,7 @@ if __name__ == "__main__":
     rgb = np.array((r << 16) | (g << 8 ) | (b << 0),dtype=np.uint32)
     color = rgb.reshape(-1,1)
     color.dtype = np.float32
+    ###############################################################
 
 
     data = np.hstack((pointcloud,color)).astype(np.float32)
@@ -113,6 +116,5 @@ if __name__ == "__main__":
         msg = pcd2.create_cloud(header=header,fields=fields,points=data )
         pcd_publish.publish(msg)
         rate.sleep()
-
 
 
